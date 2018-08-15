@@ -15,9 +15,9 @@
         <!-- 配置数据源-->
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
-		<property name="url" value="jdbc:mysql://192.168.44.181:3306/db_blog?useUnicode=true&amp;characterEncoding=UTF-8"/>
-		<property name="username" value="rdb"/>
-		<property name="password" value="abc123"/>
+		<property name="url" value="jdbc:mysql://10.145.196.109:3306/test?useUnicode=true&amp;characterEncoding=UTF-8"/>
+		<property name="username" value="kettle"/>
+		<property name="password" value="kettle"/>
 	</bean> 
 	<!-- 配置数据源 
 	<bean id="dataSource"
@@ -30,7 +30,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mappers.xml文件 -->
-		<property name="mapperLocations" value="classpath:com/ruandb/mappers/*.xml"></property>
+		<property name="mapperLocations" value="classpath:top/ruandb/mappers/*.xml"></property>
 		<!-- mybatis配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 	</bean>

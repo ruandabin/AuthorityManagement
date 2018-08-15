@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance
+http://www.springmodules.org/schema/cache/springmodules-cache.xsd  
+http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>authority</display-name>
     <!-- Spring配置文件 -->
 	<context-param>
@@ -39,8 +43,4 @@
         <servlet-name>springMVC</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>springMVC</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
 </web-app>
