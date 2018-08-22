@@ -2,13 +2,9 @@ package top.ruandb.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-
 import top.ruandb.exception.AuthorityException;
 import top.ruandb.exception.ParamException;
 

@@ -60,6 +60,7 @@ public class BeanValidator {
 	 * @param collection
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map<String, String> validateList(Collection<?> collection) {
         Preconditions.checkNotNull(collection);
         Iterator iterator = collection.iterator();
