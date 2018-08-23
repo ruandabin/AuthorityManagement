@@ -23,7 +23,7 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 			HttpServletResponse response, Object obj, Exception e) {
 		String url = request.getRequestURL().toString();
 		ModelAndView mv ;
-		if(url.endsWith(".do")){//项目定义：url以.do结尾，访问json数据
+		if(url.endsWith(".data")){//项目定义：url以.data结尾，访问json数据
 			if(e instanceof AuthorityException || e instanceof ParamException){
 				JsonData result = JsonData.fail(e.getMessage());
 				mv = new ModelAndView("jsonView",result.toMap());
@@ -32,7 +32,7 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 				JsonData result = JsonData.fail(DEFAULT_MSG);
 				mv = new ModelAndView("jsonView",result.toMap());
 			}
-		}else if(url.endsWith(".html")){//项目定义：url以.html结尾，访问页面
+		}else if(url.endsWith(".page")){//项目定义：url以.page结尾，访问页面
 			log.error("unknown page exception, url:" + url, e);
 			JsonData result = JsonData.fail(DEFAULT_MSG);
 			mv = new ModelAndView("exception", result.toMap());
