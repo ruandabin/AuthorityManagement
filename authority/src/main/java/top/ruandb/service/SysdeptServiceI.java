@@ -9,5 +9,7 @@ public interface SysdeptServiceI {
 
 	public void addSysDept(SysDept sysdept);
 	
-	public List<SysDeptDto> deptTree(SysDept sysdept);
+	public List<SysDeptDto> deptTree();
+	
+	public void updateSysDept(SysDept sysdept);
 }

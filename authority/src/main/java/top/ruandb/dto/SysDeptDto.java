@@ -21,10 +21,12 @@ import top.ruandb.entity.SysDept;
 @ToString
 public class SysDeptDto extends SysDept{
 
-	private List<SysDeptDto> list = Lists.newArrayList();
+	private List<SysDeptDto> children = Lists.newArrayList();
+	private String text ;
 	
 	public static SysDeptDto adapt(SysDept dept){
 		SysDeptDto deptDto = new SysDeptDto();
+		deptDto.text = dept.getName() ;
 		BeanUtils.copyProperties(dept, deptDto);
 		return deptDto ;
 	}

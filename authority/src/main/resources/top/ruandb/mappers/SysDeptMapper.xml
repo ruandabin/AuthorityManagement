@@ -157,11 +157,18 @@
 		count(1)
 		from sys_dept
 		where name = #{name}
+		<if test="id != null">AND id != #{id}</if>
 		<if test="parentId != null"> AND parent_id = #{parentId}</if>
 	</select>
 	<select id="selectAllDept" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sys_dept
+	</select>
+	<select id="selectAllChildDept" resultMap="BaseResultMap" parameterType="top.ruandb.entity.SysDept">
+		select
+		<include refid="Base_Column_List" />
+		from sys_dept
+		where level like #{level} || '-%'
 	</select>
 </mapper>

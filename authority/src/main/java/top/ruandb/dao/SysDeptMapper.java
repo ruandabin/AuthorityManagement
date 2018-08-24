@@ -19,5 +19,7 @@ public interface SysDeptMapper {
     
     int countByNameAndParentId(SysDept record);
     
-    List<SysDept> selectAllDept(SysDept record);
+    List<SysDept> selectAllDept();
+    
+    List<SysDept> selectAllChildDept(SysDept record);
 }
