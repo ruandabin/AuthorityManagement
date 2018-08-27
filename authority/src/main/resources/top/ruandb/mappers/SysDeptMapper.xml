@@ -166,9 +166,10 @@
 		from sys_dept
 	</select>
 	<select id="selectAllChildDept" resultMap="BaseResultMap" parameterType="top.ruandb.entity.SysDept">
+		<bind name="pattern" value="level +'-' + id + '%'" />
 		select
 		<include refid="Base_Column_List" />
 		from sys_dept
-		where level like #{level} || '-%'
+		where level like #{pattern} 
 	</select>
 </mapper>

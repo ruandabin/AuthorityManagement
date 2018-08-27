@@ -61,14 +61,14 @@ public class SysdeptServiceImpl implements SysdeptServiceI {
 		sysdept.setOperateTime(new Date());
 		updateWithChild(beforDept,sysdept);
 	}
-
+	//更新子部门
 	private void updateWithChild(SysDept before,SysDept after){
 		sysdeptMapper.updateByPrimaryKeySelective(after);
 		if( !before.getLevel().equals(after.getLevel()) ){
 			List<SysDept> beforeChild = sysdeptMapper.selectAllChildDept(before);
 			if(CollectionUtils.isNotEmpty(beforeChild)){
 				for(SysDept dept : beforeChild){
-					if(before.getLevel().indexOf(dept.getLevel()) == 0){
+					if(dept.getLevel().indexOf(before.getLevel()) == 0){
 						dept.setLevel(after.getLevel().concat(dept.getLevel().substring(before.getLevel().length())));
 						sysdeptMapper.updateByPrimaryKeySelective(dept);
 					}

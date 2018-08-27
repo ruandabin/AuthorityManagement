@@ -15,10 +15,22 @@ public class SysdeptController {
 	@Autowired
 	private SysdeptServiceI sysdeptService ;
 	
+	@RequestMapping("/dept.page")
+	public String deptPage(){
+		return "dept";
+	}
+	
 	@RequestMapping(value="/save.data")
 	@ResponseBody
 	public JsonData saveSysdept(SysDept sysdept){
 		sysdeptService.addSysDept(sysdept);
+		return JsonData.success();
+	}
+	
+	@RequestMapping(value="/update.data")
+	@ResponseBody
+	public JsonData updateSysdept(SysDept sysdept){
+		sysdeptService.updateSysDept(sysdept);
 		return JsonData.success();
 	}
 	

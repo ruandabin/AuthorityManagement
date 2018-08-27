@@ -9,21 +9,45 @@
 <script type="text/javascript"></script>
 </head>
 <body class="easyui-layout" >
-<div class="rdb" region="north" style="height: 85px "></div>
-<div region="center"></div>
-<div region="west" style="width: 200px" title="部门列表" split="true">
-<ul id="tt"></ul>
+<div  region="north" style="height: 85px "></div>
+<div region="center">
+	<div class="easyui-tabs" fit="true" border="false" id="tabs">
+		<div  title="首页" data-options="iconCls:'icon-home'">
+			<iframe frameborder=0 scrolling='auto' style='width:100%;height:98%' src='${pageContext.request.contextPath}/sys/dept/dept.page'></iframe>
+		</div>
+	</div>
+</div>
+<div region="west" style="width: 200px" title="导航菜单" split="true">
+	<div class="easyui-accordion" data-options="fit:true,border:false">
+		<div title="权限管理" data-options="iconCls:'icon-yxgl',selected:'false'" style="padding: 10px">
+			<a href="javascript:openTab('用户管理','dept.page','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px;">用户管理</a>
+			<a href="javascript:openTab('角色管理','role.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">角色管理</a>
+			<a href="javascript:openTab('权限管理','acl.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限管理</a>
+			<a href="javascript:openTab('权限更新记录','log.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限更新记录</a>
+		</div>
+		<div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
+			<a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
+			<a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
+		</div>
+	</div>
 </div>
 <div region="south" style="height: 25px;padding: 5px;" align="center"></div>
+
 <script type="text/javascript">
-$('#tt').tree({
-    url: "${pageContext.request.contextPath}/sys/dept/tree.data",
-    loadFilter: function(data){
-		if (data.ret){
-			return data.data;
-		}
-    }
-});
+var url;
+function openTab(text,url,iconCls){
+	if($("#tabs").tabs("exists",text)){
+		$("#tabs").tabs("select",text);
+	}else{
+		var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:98%' src='${pageContext.request.contextPath}/sys/dept/"+url+"'></iframe>";
+		$("#tabs").tabs("add",{
+			title:text,
+			iconCls:iconCls,
+			closable:true,
+			content:content
+		});
+	}
+}
 </script>
 </body>
 </html>
