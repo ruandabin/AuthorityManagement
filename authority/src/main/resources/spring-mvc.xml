@@ -17,6 +17,11 @@
 	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:resources mapping="/static/**" location="/static/"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/bootstrap3.3.5/" mapping="/bootstrap3.3.5/**"/>
+    <mvc:resources location="/jquery-easyui-1.5.5.6/" mapping="/jquery-easyui-1.5.5.6/**"/>
+    <mvc:resources location="/images/" mapping="/images/**"/>
 	<mvc:interceptors>
 	<bean class="top.ruandb.common.HttpInterceptor" />
 	</mvc:interceptors>
@@ -25,6 +30,8 @@
 	<bean class="top.ruandb.common.ExceptionResolver" />
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+	
+	
 
 	<!-- 视图解析器 -->
 	<bean id="viewResolver"
@@ -35,4 +42,6 @@
 
 	<!-- 使用注解的包，包括子集 -->
 	<context:component-scan base-package="top.ruandb.controller" />
+	
+	
 </beans>  

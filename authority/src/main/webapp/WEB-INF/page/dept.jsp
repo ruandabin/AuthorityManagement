@@ -138,23 +138,14 @@ $('#dept_dg').datagrid({
  rownumbers:true,
  singleSelect:true,
  fit:true,
- url:"",
+ url:"${pageContext.request.contextPath}/sys/user/selectAll.data",
  columns:[[{field:'id',width:50,align:'center',title:'编号'},
-           {field:'jobName',width:150,align:'center',title:'Job名称'},
-           {field:'srcType',width:60,align:'center',title:'分类'},
-           {field:'batchDate',width:100,align:'center',title:'调度日期'},
-           {field:'startTime',width:150,align:'center',title:'开始时间'},
-           {field:'endTime',width:150,align:'center',title:'结束时间'},
-           {field:'status',width:60,align:'center',title:'Job状态'},
-           {field:'sucessFlag',width:100,align:'center',title:'是否成功',formatter: function(value,row,index){
-        	   if(value == 'failure'){
-        		   return '<font color=red>'+value+'</font>';
-					
-				}else{
-					
-					return '<font>'+value+'</font>';
-				}
-           }}
+           {field:'username',width:150,align:'center',title:'姓名'},
+           {field:'dept_id',width:60,align:'center',title:'所属部门'},
+           {field:'mail',width:100,align:'center',title:'电子邮箱'},
+           {field:'phone',width:150,align:'center',title:'电话'},
+           {field:'status',width:60,align:'center',title:'状态'}
+          
            ]]
 });
 	 

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance
+<web-app
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance
 http://www.springmodules.org/schema/cache/springmodules-cache.xsd  
-http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd" 
-xmlns="http://java.sun.com/xml/ns/javaee" 
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>authority</display-name>
-    <!-- Spring配置文件 -->
+http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>authority</display-name>
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- Spring配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
@@ -40,11 +45,21 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
-        <servlet-name>springMVC</servlet-name>
-        <url-pattern>*.data</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>springMVC</servlet-name>
-        <url-pattern>*.page</url-pattern>
-    </servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.data</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.page</url-pattern>
+	</servlet-mapping>
+	<!-- 用户登录拦截器 -->
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>top.ruandb.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/sys/*</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
 </web-app>

@@ -18,11 +18,11 @@ import top.ruandb.dao.SysDeptMapper;
 import top.ruandb.dto.SysDeptDto;
 import top.ruandb.entity.SysDept;
 import top.ruandb.exception.AuthorityException;
-import top.ruandb.service.SysdeptServiceI;
+import top.ruandb.service.SysDeptServiceI;
 import top.ruandb.utils.BeanValidator;
 
 @Service("sysdeptService")
-public class SysdeptServiceImpl implements SysdeptServiceI {
+public class SysDeptServiceImpl implements SysDeptServiceI {
 	// 部门层级连接符
 	public final static String SEPARATOR = "-";
 	// 顶层层级

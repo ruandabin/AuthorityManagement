@@ -9,7 +9,19 @@
 <script type="text/javascript"></script>
 </head>
 <body class="easyui-layout" >
-<div  region="north" style="height: 85px "></div>
+<div  region="north" style="height: 85px ">
+<table style="padding: 5px" width="100%">
+		<tr>
+			<td width="50%">
+				<!-- <div class="knockout"><a>ETL监控分析系统</a></div> -->
+			</td>
+			<td valign="bottom" align="right" width="50%">
+				<font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${user.username}</font>
+				<div id="result"></div>
+			</td>
+		</tr>
+	</table>
+</div>
 <div region="center">
 	<div class="easyui-tabs" fit="true" border="false" id="tabs">
 		<div  title="首页" data-options="iconCls:'icon-home'">
@@ -47,6 +59,14 @@ function openTab(text,url,iconCls){
 			content:content
 		});
 	}
+}
+
+function logout(){
+	$.messager.confirm("系统提示","您确定要退出系统吗",function(r){
+		if(r){
+			window.location.href="${pageContext.request.contextPath}/logout.page";
+		}
+	});
 }
 </script>
 </body>

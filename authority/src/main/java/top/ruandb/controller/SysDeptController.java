@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import top.ruandb.common.JsonData;
 import top.ruandb.entity.SysDept;
-import top.ruandb.service.SysdeptServiceI;
+import top.ruandb.service.SysDeptServiceI;
 
 @Controller
 @RequestMapping("/sys/dept")
-public class SysdeptController {
+public class SysDeptController {
 
 	@Autowired
-	private SysdeptServiceI sysdeptService ;
+	private SysDeptServiceI sysdeptService ;
 	
 	@RequestMapping("/dept.page")
 	public String deptPage(){
