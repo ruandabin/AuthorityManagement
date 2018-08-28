@@ -1,22 +1,28 @@
 package top.ruandb.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 
 import top.ruandb.dao.SysUserMapper;
 import top.ruandb.dto.PageQuery;
 import top.ruandb.dto.PageResult;
+import top.ruandb.dto.SysUserDto;
 import top.ruandb.entity.SysUser;
 import top.ruandb.exception.ParamException;
 import top.ruandb.service.SysUserServiceI;
 import top.ruandb.utils.BeanValidator;
 import top.ruandb.utils.MD5Util;
 import top.ruandb.utils.PasswordUtils;
+import top.ruandb.utils.StringUtil;
 
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserServiceI {
@@ -84,8 +90,13 @@ public class SysUserServiceImpl implements SysUserServiceI {
 
 	//查询所有user
 	@Override
-	public PageResult<SysUser> selectAll(PageQuery pq) {
-		PageResult<SysUser> result = new PageResult<SysUser>(sysUserMapper.selectAll(pq), sysUserMapper.countAll(pq));
+	public PageResult<SysUserDto> selectAll(SysUserDto sysUserDto,PageQuery pq) {
+		Map<String,Object> map = Maps.newHashMap();
+		map.put("start", pq.getStart());
+		map.put("rows", pq.getRows());
+		map.put("username", StringUtil.formatLike(sysUserDto.getUsername()));
+		map.put("deptName", sysUserDto.getDeptName());
+		PageResult<SysUserDto> result = new PageResult<SysUserDto>(sysUserMapper.selectAll(map), sysUserMapper.countAll(pq));
 		return result;
 	}
 }

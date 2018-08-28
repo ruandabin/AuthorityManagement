@@ -1,9 +1,8 @@
 package top.ruandb.service;
 
-import java.util.List;
-
 import top.ruandb.dto.PageQuery;
 import top.ruandb.dto.PageResult;
+import top.ruandb.dto.SysUserDto;
 import top.ruandb.entity.SysUser;
 
 public interface SysUserServiceI {
@@ -14,5 +13,5 @@ public interface SysUserServiceI {
 	
 	public SysUser findByKeyWord(String keyWord);
 	
-	public PageResult<SysUser> selectAll(PageQuery pq); //分页查询所有用户
+	public PageResult<SysUserDto> selectAll(SysUserDto sysUserDto ,PageQuery pq); //分页查询所有用户
 }

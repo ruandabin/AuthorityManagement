@@ -1,8 +1,10 @@
 package top.ruandb.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import top.ruandb.dto.PageQuery;
+import top.ruandb.dto.SysUserDto;
 import top.ruandb.entity.SysUser;
 
 public interface SysUserMapper {
@@ -22,7 +24,7 @@ public interface SysUserMapper {
     
     int countByMail(SysUser record);
     
-	public List<SysUser> selectAll(PageQuery pq);
+	public List<SysUserDto> selectAll(Map<String,Object> map);
 	
 	public int countAll(PageQuery pq);
 	

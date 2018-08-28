@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import top.ruandb.common.JsonData;
 import top.ruandb.dto.PageQuery;
 import top.ruandb.dto.PageResult;
+import top.ruandb.dto.SysUserDto;
 import top.ruandb.entity.SysUser;
 import top.ruandb.service.SysUserServiceI;
 
@@ -34,8 +35,8 @@ public class SysUserController {
 	
 	@RequestMapping(value = "/selectAll.data")
 	@ResponseBody
-	public PageResult<SysUser> selectAll(PageQuery pq){
-		PageResult<SysUser> result = sysUserService.selectAll(pq);
-		return result;
+	public JsonData selectAll(SysUserDto sysUserDto,PageQuery pq){
+		PageResult<SysUserDto> result = sysUserService.selectAll(sysUserDto,pq);
+		return JsonData.success(result);
 	}
 }
