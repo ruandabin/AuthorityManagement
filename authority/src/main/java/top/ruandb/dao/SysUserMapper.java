@@ -26,7 +26,7 @@ public interface SysUserMapper {
     
 	public List<SysUserDto> selectAll(Map<String,Object> map);
 	
-	public int countAll(PageQuery pq);
+	public int countAll(Map<String,Object> map);
 	
 	public SysUser findByKeyWord(String keyWord);
 }

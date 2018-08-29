@@ -225,10 +225,22 @@
 		</where>
 		LIMIT #{start}, #{rows}
 	</select>
-	<select id="countAll" resultType="int" parameterType="top.ruandb.dto.PageQuery">
-		select
+	<select id="countAll" resultType="int" parameterType="map">
+		SELECT
 		count(1)
-		from sys_user
+		FROM sys_user a
+		LEFT JOIN sys_dept b ON a.dept_id = b.id
+		<where>
+			<if test="username!=null and username!='' ">
+				and a.username like #{username}
+			</if>
+			<if test="deptId!=null and deptId!='' ">
+				and b.id = #{deptId}
+			</if>
+			<if test="deptLevel!=null and deptLevel!='' ">
+				or b.level like #{deptLevel}
+			</if>
+		</where>
 		LIMIT #{start}, #{rows}
 	</select>
 </mapper>

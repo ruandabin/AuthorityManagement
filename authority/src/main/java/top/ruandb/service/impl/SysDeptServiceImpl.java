@@ -14,12 +14,14 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
+import top.ruandb.common.RequestHolder;
 import top.ruandb.dao.SysDeptMapper;
 import top.ruandb.dto.SysDeptDto;
 import top.ruandb.entity.SysDept;
 import top.ruandb.exception.AuthorityException;
 import top.ruandb.service.SysDeptServiceI;
 import top.ruandb.utils.BeanValidator;
+import top.ruandb.utils.IpUtil;
 
 @Service("sysdeptService")
 public class SysDeptServiceImpl implements SysDeptServiceI {
@@ -39,8 +41,8 @@ public class SysDeptServiceImpl implements SysDeptServiceI {
 			throw new AuthorityException("同层级下已经存在相同名称的部门");
 		}
 		sysdept.setLevel(calculateLevel(sysdept));
-		sysdept.setOperator("admin");// TODO
-		sysdept.setOperateIp("127.0.0.1");// TODO
+		sysdept.setOperator(RequestHolder.getCurrentUser().getUsername());
+		sysdept.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));// TODO
 		sysdept.setOperateTime(new Date());
 		sysdeptMapper.insertSelective(sysdept);
 	}
@@ -56,8 +58,8 @@ public class SysDeptServiceImpl implements SysDeptServiceI {
 		}
 		
 		sysdept.setLevel(calculateLevel(sysdept));
-		sysdept.setOperator("admin");// TODO
-		sysdept.setOperateIp("127.0.0.1");// TODO
+		sysdept.setOperator(RequestHolder.getCurrentUser().getUsername());// TODO
+		sysdept.setOperateIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));// TODO
 		sysdept.setOperateTime(new Date());
 		updateWithChild(beforDept,sysdept);
 	}

@@ -9,6 +9,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
+
+import top.ruandb.common.RequestHolder;
 import top.ruandb.entity.SysUser;
 
 public class LoginFilter implements Filter {
@@ -32,6 +36,8 @@ public class LoginFilter implements Filter {
 			System.out.println("sssssssssssss");
 			return;
 		}
+		RequestHolder.add(sysUser);
+        RequestHolder.add(req);
 		filterChain.doFilter(servletRequest, servletResponse);
 		return;
 

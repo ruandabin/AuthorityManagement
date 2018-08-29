@@ -42,12 +42,13 @@ public class HttpInterceptor implements HandlerInterceptor {
 		long start = (Long) request.getAttribute(START_TIME);
         long end = System.currentTimeMillis();
         log.info("request completed. url:{}, cost:{}", url, end - start);
+        RequestHolder.remove();//移除Threadlocal中的用户和请求信息
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1,
 			Object arg2, ModelAndView arg3) throws Exception {
-
+		RequestHolder.remove();//移除Threadlocal中的用户和请求信息
 	}
 
 }

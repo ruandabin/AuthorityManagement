@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
+import top.ruandb.common.RequestHolder;
 import top.ruandb.dao.SysUserMapper;
+import top.ruandb.dto.Mail;
 import top.ruandb.dto.PageQuery;
 import top.ruandb.dto.PageResult;
 import top.ruandb.dto.SysUserDto;
@@ -20,7 +24,9 @@ import top.ruandb.entity.SysUser;
 import top.ruandb.exception.ParamException;
 import top.ruandb.service.SysUserServiceI;
 import top.ruandb.utils.BeanValidator;
+import top.ruandb.utils.IpUtil;
 import top.ruandb.utils.MD5Util;
+import top.ruandb.utils.MailUtil;
 import top.ruandb.utils.PasswordUtils;
 import top.ruandb.utils.StringUtil;
 
@@ -41,13 +47,19 @@ public class SysUserServiceImpl implements SysUserServiceI {
 			throw new ParamException("邮箱已被占用");
 		}
 		String password = PasswordUtils.randomPassword();
-		password = "12345678";// 测试使用
+		 password = "12345678";// 测试使用
 		String encryptedPassword = MD5Util.encrypt(password);
 		sysUser.setPassword(encryptedPassword);
-		sysUser.setOperator("admin");// TODO
-		sysUser.setOperateIp("127.0.0.1");// TODO
+		sysUser.setOperator(RequestHolder.getCurrentUser().getUsername());
+		sysUser.setOperateIp(IpUtil.getRemoteIp(RequestHolder
+				.getCurrentRequest()));// TODO
 		sysUser.setOperateTime(new Date());
 		// TODO: sendEmail
+		Set<String> receiver = Sets.newHashSet();
+//		receiver.add(" ");// TODO
+//		Mail mail = Mail.builder().subject("权限管理系统密码").receivers(receiver)
+//				.message("欢迎使用权限管理系统，您的登录名是您注册的邮箱或手机号,密码：" + password).build();
+//		MailUtil.send(mail);
 		sysUserMapper.insertSelective(sysUser);
 	}
 
@@ -63,8 +75,9 @@ public class SysUserServiceImpl implements SysUserServiceI {
 		}
 		SysUser before = sysUserMapper.selectByPrimaryKey(sysUser.getId());
 		Preconditions.checkNotNull(before, "待更新的用户不存在");
-		sysUser.setOperator("admin");// TODO
-		sysUser.setOperateIp("127.0.0.1");// TODO
+		sysUser.setOperator(RequestHolder.getCurrentUser().getUsername());// TODO
+		sysUser.setOperateIp(IpUtil.getRemoteIp(RequestHolder
+				.getCurrentRequest()));// TODO
 		sysUser.setOperateTime(new Date());
 		sysUserMapper.updateByPrimaryKeySelective(sysUser);
 	}
@@ -96,10 +109,11 @@ public class SysUserServiceImpl implements SysUserServiceI {
 		map.put("rows", pq.getRows());
 		map.put("username", StringUtil.formatLike(sysUserDto.getUsername()));
 		map.put("deptId", sysUserDto.getDeptId());
-		map.put("deptLevel", sysUserDto.getDeptLevel()
-				+ SysDeptServiceImpl.SEPARATOR + sysUserDto.getDeptId() + '%');// 特殊模糊查询，查询自己和自己子部门的用户
+		String formatLevel = sysUserDto.getDeptLevel() == null? null : sysUserDto.getDeptLevel()
+				+ SysDeptServiceImpl.SEPARATOR + sysUserDto.getDeptId() + '%' ; 
+		map.put("deptLevel", formatLevel);// 特殊模糊查询，查询自己和自己子部门的用户
 		PageResult<SysUserDto> result = new PageResult<SysUserDto>(
-				sysUserMapper.selectAll(map), sysUserMapper.countAll(pq));
+				sysUserMapper.selectAll(map), sysUserMapper.countAll(map));
 		return result;
 	}
 }
