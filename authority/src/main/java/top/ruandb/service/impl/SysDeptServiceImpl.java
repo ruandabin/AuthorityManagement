@@ -156,6 +156,5 @@ public class SysDeptServiceImpl implements SysDeptServiceI {
 				transform2Tree(sList, multimap);
 			}
 		}
-
 	}
 }

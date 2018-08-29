@@ -149,4 +149,25 @@
       operate_ip = #{operateIp,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="countByNameAndParentId" resultType="int"
+		parameterType="top.ruandb.entity.SysDept">
+		select
+		count(1)
+		from sys_acl_module
+		where name = #{name}
+		<if test="id != null">AND id != #{id}</if>
+		<if test="parentId != null"> AND parent_id = #{parentId}</if>
+	</select>
+	<select id="selectAllSysAclModule" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from acl_module
+	</select>
+	<select id="selectAllChildSysAclModule" resultMap="BaseResultMap" parameterType="top.ruandb.entity.SysAclModule">
+		<bind name="pattern" value="level +'-' + id + '%'" />
+		select
+		<include refid="Base_Column_List" />
+		from acl_module
+		where level like #{pattern} 
+	</select>
 </mapper>
