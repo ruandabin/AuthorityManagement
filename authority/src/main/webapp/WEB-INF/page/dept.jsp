@@ -9,8 +9,6 @@
 <script type="text/javascript"></script>
 </head>
 <body class="easyui-layout" fit="true">
-	<div region="north" style="height: 40px" border="false">
-		用户管理——>维护部门与用户关系</div>
 	<div region="center" border="false">
 		<table id="dept_dg" title="用户列表" toolbar="#tb" fit="true"></table>
 		<div id="tb">
@@ -194,8 +192,8 @@
 					var result = eval('(' + result + ')');
 					if (result.ret) {
 						$.messager.alert("系统提示", "保存成功");
-						resetUserValue();
-						$("#sysUser_dlg").dialog("close");
+						resetValue();
+						$("#dept_dlg").dialog("close");
 						$("#dept_tt").tree("reload");
 					} else {
 						$.messager.alert("系统提示", "保存失败:" + result.msg);
@@ -291,7 +289,7 @@
 				hidden : true
 			}, {
 				field : 'username',
-				width : 150,
+				width : 60,
 				align : 'center',
 				title : '姓名'
 			}, {
@@ -301,7 +299,7 @@
 				title : '所属部门'
 			}, {
 				field : 'mail',
-				width : 100,
+				width : 150,
 				align : 'center',
 				title : '电子邮箱'
 			}, {

@@ -17,9 +17,9 @@ public class SysAclModuleController {
 	@Autowired
 	private SysAclModuleServiceI sysAclModuleService;
 	
-	@RequestMapping("/aclModule.page")
+	@RequestMapping("/acl.page")
 	public String deptPage(){
-		return "aclModule";
+		return "acl";
 	}
 	
 	@RequestMapping(value="/save.data")

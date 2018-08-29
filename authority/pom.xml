@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>top.ruandb</groupId>
@@ -168,6 +169,8 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<!-- 指明编译源代码时使用的字符编码， maven编译的时候默认使用的GBK编码， 通过encoding属性设置字符编码， 告诉maven这个项目使用UTF-8来编译 -->
+					<encoding>utf8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>

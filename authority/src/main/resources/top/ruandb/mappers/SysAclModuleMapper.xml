@@ -161,13 +161,13 @@
 	<select id="selectAllSysAclModule" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from acl_module
+		from sys_acl_module
 	</select>
 	<select id="selectAllChildSysAclModule" resultMap="BaseResultMap" parameterType="top.ruandb.entity.SysAclModule">
 		<bind name="pattern" value="level +'-' + id + '%'" />
 		select
 		<include refid="Base_Column_List" />
-		from acl_module
+		from sys_acl_module
 		where level like #{pattern} 
 	</select>
 </mapper>

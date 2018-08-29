@@ -32,9 +32,9 @@
 <div region="west" style="width: 200px" title="导航菜单" split="true">
 	<div class="easyui-accordion" data-options="fit:true,border:false">
 		<div title="权限管理" data-options="iconCls:'icon-yxgl',selected:'false'" style="padding: 10px">
-			<a href="javascript:openTab('用户管理','dept.page','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px;">用户管理</a>
+			<a href="javascript:openTab('用户管理','dept/dept.page','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px;">用户管理</a>
 			<a href="javascript:openTab('角色管理','role.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">角色管理</a>
-			<a href="javascript:openTab('权限管理','acl.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限管理</a>
+			<a href="javascript:openTab('权限管理','acl/acl.page','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限管理</a>
 			<a href="javascript:openTab('权限更新记录','log.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限更新记录</a>
 		</div>
 		<div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
@@ -51,7 +51,7 @@ function openTab(text,url,iconCls){
 	if($("#tabs").tabs("exists",text)){
 		$("#tabs").tabs("select",text);
 	}else{
-		var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:98%' src='${pageContext.request.contextPath}/sys/dept/"+url+"'></iframe>";
+		var content="<iframe frameborder=0 scrolling='auto' style='width:100%;height:98%' src='${pageContext.request.contextPath}/sys/"+url+"'></iframe>";
 		$("#tabs").tabs("add",{
 			title:text,
 			iconCls:iconCls,
