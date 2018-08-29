@@ -30,7 +30,7 @@ public class SysUserServiceImpl implements SysUserServiceI {
 	@Autowired
 	private SysUserMapper sysUserMapper;
 
-	//增加用户
+	// 增加用户
 	@Override
 	public void addUser(SysUser sysUser) {
 		BeanValidator.check(sysUser);
@@ -51,7 +51,7 @@ public class SysUserServiceImpl implements SysUserServiceI {
 		sysUserMapper.insertSelective(sysUser);
 	}
 
-	//更新用户信息
+	// 更新用户信息
 	@Override
 	public void updateUser(SysUser sysUser) {
 		BeanValidator.check(sysUser);
@@ -62,7 +62,7 @@ public class SysUserServiceImpl implements SysUserServiceI {
 			throw new ParamException("邮箱已被占用");
 		}
 		SysUser before = sysUserMapper.selectByPrimaryKey(sysUser.getId());
-		Preconditions.checkNotNull(before,"待更新的用户不存在");
+		Preconditions.checkNotNull(before, "待更新的用户不存在");
 		sysUser.setOperator("admin");// TODO
 		sysUser.setOperateIp("127.0.0.1");// TODO
 		sysUser.setOperateTime(new Date());
@@ -79,8 +79,8 @@ public class SysUserServiceImpl implements SysUserServiceI {
 		return sysUserMapper.countByMail(sysUser) > 0;
 	}
 
-	public List<SysUser> getAll(){
-		return null ;
+	public List<SysUser> getAll() {
+		return null;
 	}
 
 	@Override
@@ -88,15 +88,18 @@ public class SysUserServiceImpl implements SysUserServiceI {
 		return sysUserMapper.findByKeyWord(keyWord);
 	}
 
-	//查询所有user
+	// 查询所有user
 	@Override
-	public PageResult<SysUserDto> selectAll(SysUserDto sysUserDto,PageQuery pq) {
-		Map<String,Object> map = Maps.newHashMap();
+	public PageResult<SysUserDto> selectAll(SysUserDto sysUserDto, PageQuery pq) {
+		Map<String, Object> map = Maps.newHashMap();
 		map.put("start", pq.getStart());
 		map.put("rows", pq.getRows());
 		map.put("username", StringUtil.formatLike(sysUserDto.getUsername()));
-		map.put("deptName", sysUserDto.getDeptName());
-		PageResult<SysUserDto> result = new PageResult<SysUserDto>(sysUserMapper.selectAll(map), sysUserMapper.countAll(pq));
+		map.put("deptId", sysUserDto.getDeptId());
+		map.put("deptLevel", sysUserDto.getDeptLevel()
+				+ SysDeptServiceImpl.SEPARATOR + sysUserDto.getDeptId() + '%');// 特殊模糊查询，查询自己和自己子部门的用户
+		PageResult<SysUserDto> result = new PageResult<SysUserDto>(
+				sysUserMapper.selectAll(map), sysUserMapper.countAll(pq));
 		return result;
 	}
 }

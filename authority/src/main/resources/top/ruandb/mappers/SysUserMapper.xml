@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.ruandb.dao.SysUserMapper">
-	<resultMap id="BaseResultMap"
-		type="top.ruandb.entity.SysUser">
+	<resultMap id="BaseResultMap" type="top.ruandb.entity.SysUser">
 		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="username" property="username"
-			jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="phone" property="phone" jdbcType="VARCHAR" />
 		<result column="mail" property="mail" jdbcType="VARCHAR" />
-		<result column="password" property="password"
-			jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
 		<result column="dept_id" property="deptId" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
-		<result column="operator" property="operator"
-			jdbcType="VARCHAR" />
-		<result column="operate_time" property="operateTime"
-			jdbcType="TIMESTAMP" />
-		<result column="operate_ip" property="operateIp"
-			jdbcType="VARCHAR" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+		<result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
 	</resultMap>
 	<resultMap id="SubResultMap" type="top.ruandb.dto.SysUserDto"
 		extends="BaseResultMap">
-		<result column="dept_name" property="deptName"
-			jdbcType="VARCHAR" />
+		<result column="dept_name" property="deptName" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, username, phone, mail, password, dept_id, status, remark, operator,
+		id, username, phone, mail, password, dept_id, status,
+		remark, operator,
 		operate_time,
 		operate_ip
 	</sql>
@@ -37,25 +31,28 @@
 		from sys_user
 		where id = #{id,jdbcType=INTEGER}
 	</select>
-	<delete id="deleteByPrimaryKey"
-		parameterType="java.lang.Integer">
-		delete from sys_user
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		sys_user
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="top.ruandb.entity.SysUser">
-		insert into sys_user (id, username, phone,
+		insert into sys_user (id,
+		username, phone,
 		mail, password, dept_id,
 		status, remark, operator,
 		operate_time, operate_ip)
-		values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+		values (#{id,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR},
 		#{phone,jdbcType=VARCHAR},
-		#{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER},
-		#{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+		#{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{deptId,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{remark,jdbcType=VARCHAR},
 		#{operator,jdbcType=VARCHAR},
 		#{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective"
-		parameterType="top.ruandb.entity.SysUser">
+	<insert id="insertSelective" parameterType="top.ruandb.entity.SysUser">
 		insert into sys_user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -128,8 +125,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective"
-		parameterType="top.ruandb.entity.SysUser">
+	<update id="updateByPrimaryKeySelective" parameterType="top.ruandb.entity.SysUser">
 		update sys_user
 		<set>
 			<if test="username != null">
@@ -165,23 +161,25 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey"
-		parameterType="top.ruandb.entity.SysUser">
+	<update id="updateByPrimaryKey" parameterType="top.ruandb.entity.SysUser">
 		update sys_user
 		set username = #{username,jdbcType=VARCHAR},
-		phone = #{phone,jdbcType=VARCHAR},
+		phone =
+		#{phone,jdbcType=VARCHAR},
 		mail = #{mail,jdbcType=VARCHAR},
-		password = #{password,jdbcType=VARCHAR},
+		password =
+		#{password,jdbcType=VARCHAR},
 		dept_id = #{deptId,jdbcType=INTEGER},
 		status = #{status,jdbcType=INTEGER},
-		remark = #{remark,jdbcType=VARCHAR},
+		remark =
+		#{remark,jdbcType=VARCHAR},
 		operator = #{operator,jdbcType=VARCHAR},
 		operate_time = #{operateTime,jdbcType=TIMESTAMP},
-		operate_ip = #{operateIp,jdbcType=VARCHAR}
+		operate_ip =
+		#{operateIp,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<select id="countByPhone" resultType="int"
-		parameterType="top.ruandb.entity.SysUser">
+	<select id="countByPhone" resultType="int" parameterType="top.ruandb.entity.SysUser">
 		select
 		count(1)
 		from sys_user
@@ -190,8 +188,7 @@
 			AND id != #{id}
 		</if>
 	</select>
-	<select id="countByMail" resultType="int"
-		parameterType="top.ruandb.entity.SysUser">
+	<select id="countByMail" resultType="int" parameterType="top.ruandb.entity.SysUser">
 		select
 		count(1)
 		from sys_user
@@ -209,21 +206,26 @@
 		OR mail = #{keyword}
 	</select>
 
-	<select id="selectAll" resultMap="SubResultMap"
-		parameterType="map">
+	<select id="selectAll" resultMap="SubResultMap" parameterType="map">
 		SELECT
-		a.id, a.username, a.phone, a.mail, a.dept_id, a.status, b.name AS dept_name
+		a.id, a.username, a.phone, a.mail, a.dept_id, a.status, b.name
+		AS dept_name
 		FROM sys_user a
 		LEFT JOIN sys_dept b ON a.dept_id = b.id
 		<where>
 			<if test="username!=null and username!='' ">
 				and a.username like #{username}
 			</if>
+			<if test="deptId!=null and deptId!='' ">
+				and b.id = #{deptId}
+			</if>
+			<if test="deptLevel!=null and deptLevel!='' ">
+				or b.level like #{deptLevel}
+			</if>
 		</where>
 		LIMIT #{start}, #{rows}
 	</select>
-	<select id="countAll" resultType="int"
-		parameterType="top.ruandb.dto.PageQuery">
+	<select id="countAll" resultType="int" parameterType="top.ruandb.dto.PageQuery">
 		select
 		count(1)
 		from sys_user

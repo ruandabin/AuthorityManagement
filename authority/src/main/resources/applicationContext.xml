@@ -12,20 +12,20 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">  
-        <!-- 配置数据源
+        <!-- 配置数据源-->
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="url" value="jdbc:mysql://10.145.196.109:3306/test?useUnicode=true&amp;characterEncoding=UTF-8"/>
 		<property name="username" value="kettle"/>
 		<property name="password" value="kettle"/>
-	</bean> -->
-	<!-- 配置数据源 -->
+	</bean> 
+	<!-- 配置数据源 
 	<bean id="dataSource"
 		class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="url" value="jdbc:mysql://192.168.44.181:3306/test?useUnicode=true&amp;characterEncoding=UTF-8"/>
 		<property name="username" value="root"/>
 		<property name="password" value="abc123"/>
-	</bean>
+	</bean>-->
 	<!-- 配置mybatis的sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

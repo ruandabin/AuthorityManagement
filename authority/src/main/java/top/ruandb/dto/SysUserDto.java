@@ -9,4 +9,5 @@ import top.ruandb.entity.SysUser;
 public class SysUserDto extends SysUser{
 
 	private String deptName;
+	private String deptLevel;
 }
