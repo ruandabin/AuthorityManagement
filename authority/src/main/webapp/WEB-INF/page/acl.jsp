@@ -15,7 +15,7 @@
 			<div>
 				&nbsp;权限名称：&nbsp;<input type="text" id="acl_name" size="20"
 					onkeydown="if(event.keyCode==13) searchJob()" /> <input
-					type="hidden" id="acl_modelId" size="20" /> <input type="hidden"
+					type="hidden" id="acl_moduleId" size="20" /> <input type="hidden"
 					id="acl_level" size="20" /> <a href="javascript:searchAcl()"
 					class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 				<a href="javascript:openAclAddDialog()" class="easyui-linkbutton"
@@ -47,8 +47,8 @@
 			<table cellspacing="10px" border="0">
 				<tr>
 					<td>上级模块：</td>
-					<td><input id="aclModule_cc" name="parentId" style="width: 200px;">
-					</td>
+					<td><input id="aclModule_cc" name="parentId"
+						style="width: 200px;"></td>
 				</tr>
 				<tr>
 					<td>名称：</td>
@@ -64,8 +64,8 @@
 				</tr>
 				<tr>
 					<td>状态：</td>
-					<td><select id="aclModule_co" class="easyui-combobox" name="status"
-						style="width: 200px;">
+					<td><select id="aclModule_co" class="easyui-combobox"
+						name="status" style="width: 200px;">
 							<option value="1">正常</option>
 							<option value="0">冻结</option>
 					</select></td>
@@ -91,21 +91,35 @@
 		<form id="acl_fm" method="post">
 			<table cellspacing="10px" border="0">
 				<tr>
-					<td>上级模块：</td>
+					<td>权限模块：</td>
 					<td><input id="acl_cc" name=aclModuleId values="id"
 						style="width: 200px;">&nbsp;<font color="red">*</font></td>
 				</tr>
 				<tr>
-					<td>名称：</td>
+					<td>权限名称：</td>
 					<td><input class="easyui-validatebox" type="text"
 						id="acl_name" name="name" style="width: 200px;" />&nbsp;<font
 						color="red">*</font></td>
 				</tr>
 				<tr>
 					<td>顺序：</td>
-					<td><input class="easyui-validatebox" type="text"
-						id="acl_seq" name="seq" style="width: 200px;" />&nbsp;<font
-						color="red">*</font></td>
+					<td><input class="easyui-validatebox" type="text" id="acl_seq"
+						name="seq" style="width: 200px;" />&nbsp;<font color="red">*</font></td>
+				</tr>
+				<tr>
+					<td>URL：</td>
+					<td><input class="easyui-validatebox" type="text" id="acl_url"
+						name="url" style="width: 200px;" />&nbsp;<font color="red">*</font></td>
+				</tr>
+				<tr>
+					<td>类型：</td>
+					<td><select id="acl_type" class="easyui-combobox" name="type"
+						style="width: 200px;">
+							<option value="1">菜单</option>
+							<option value="2">按钮</option>
+							<option value="2">其他</option>
+					</select></td>
+
 				</tr>
 				<tr>
 					<td>状态：</td>
@@ -124,7 +138,7 @@
 			</table>
 		</form>
 	</div>
-	<div id="#acl-dlg-buttons">
+	<div id="acl-dlg-buttons">
 		<a href="javascript:saveAcl()" class="easyui-linkbutton"
 			iconCls="icon-ok">保存</a> <a href="javascript:closeAclDialog()"
 			class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
@@ -162,7 +176,7 @@
 				return;
 			}
 			var row = selectedRows[0];
-			$("#sysUser_dlg").dialog("open").dialog("setTitle", "编辑权限点信息");
+			$("#sysAcl_dlg").dialog("open").dialog("setTitle", "编辑权限点信息");
 			$('#acl_fm').form('load', row);
 			url = "${pageContext.request.contextPath}/sys/acl/update.data?id="
 					+ row.id;
@@ -179,6 +193,7 @@
 			$("#acl_cc").combotree('setValue', "");
 			$("#acl_name").val("");
 			$("#acl_seq").val("");
+			$("#acl_url").val("");
 			$("#acl_co").combobox('setValues', "1");
 		}
 
@@ -195,6 +210,9 @@
 						resetValue();
 						$("#aclModule_dlg").dialog("close");
 						$("#aclModule_tt").tree("reload");
+						$('#aclModule_cc').combotree("reload");
+						$('#acl_cc').combotree("reload");
+
 					} else {
 						$.messager.alert("系统提示", "保存失败:" + result.msg);
 						return;
@@ -234,10 +252,10 @@
 		}
 
 		function searchAcl() {
-			$('#Acl_dg').datagrid('reload', {
-				username : $("#acl_name").val(),
-				deptLevel : $("#acl_level").val(),
-				deptId : $("#acl_moduleId").val()
+			$('#acl_dg').datagrid('reload', {
+				name : $("#acl_name").val(),
+				moduleLevel : $("#acl_level").val(),
+				aclModuleId : $("#acl_moduleId").val()
 
 			});
 		}
@@ -293,7 +311,7 @@
 				align : 'center',
 				title : '权限名称'
 			}, {
-				field : 'aclModuleName',
+				field : 'moduleName',
 				width : 60,
 				align : 'center',
 				title : '权限模块'
@@ -301,9 +319,18 @@
 				field : 'type',
 				width : 100,
 				align : 'center',
-				title : '类型'
+				title : '类型',
+				formatter:function(value, row, index){
+					if (value == 1) {
+						return "菜单";
+					} else if (value == 2) {
+						return "按钮";
+					} else {
+						return "其他";
+					}
+				}
 			}, {
-				field : 'URL',
+				field : 'url',
 				width : 150,
 				align : 'center',
 				title : 'URL'

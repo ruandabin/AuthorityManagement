@@ -14,16 +14,14 @@
 		<div id="tb">
 			<div>
 				&nbsp;姓名：&nbsp;<input type="text" id="dept_username" size="20"
-					onkeydown="if(event.keyCode==13) searchJob()" /> 
-					<input type="hidden" id="dept_deptId" size="20"/> 
-					<input type="hidden" id="dept_level" size="20"/> 
-					<a
-					href="javascript:searchUser()" class="easyui-linkbutton"
-					iconCls="icon-search" plain="true">搜索</a> <a
-					href="javascript:openUserAddDialog()" class="easyui-linkbutton"
+					onkeydown="if(event.keyCode==13) searchJob()" /> <input
+					type="hidden" id="dept_deptId" size="20" /> <input type="hidden"
+					id="dept_level" size="20" /> <a href="javascript:searchUser()"
+					class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+				<a href="javascript:openUserAddDialog()" class="easyui-linkbutton"
 					iconCls="icon-add" plain="true">添加</a> <a
 					href="javascript:openUserUpdateDialog()" class="easyui-linkbutton"
-					iconCls="icon-edit" plain="true">修改</a> 
+					iconCls="icon-edit" plain="true">修改</a>
 			</div>
 
 		</div>
@@ -86,8 +84,8 @@
 			<table cellspacing="10px" border="0">
 				<tr>
 					<td>所属部门：</td>
-					<td><input id="user_cc" name="deptId" values="id" style="width: 200px;">&nbsp;<font
-						color="red">*</font></td>
+					<td><input id="user_cc" name="deptId" values="id"
+						style="width: 200px;">&nbsp;<font color="red">*</font></td>
 				</tr>
 				<tr>
 					<td>姓名：</td>
@@ -97,8 +95,9 @@
 				</tr>
 				<tr>
 					<td>电子邮箱：</td>
-					<td><input class="easyui-validatebox" type="text" id="user_mail"
-						name="mail" style="width: 200px;" />&nbsp;<font color="red">*</font></td>
+					<td><input class="easyui-validatebox" type="text"
+						id="user_mail" name="mail" style="width: 200px;" />&nbsp;<font
+						color="red">*</font></td>
 				</tr>
 				<tr>
 					<td>电话：</td>
@@ -110,16 +109,15 @@
 					<td>状态：</td>
 					<td><select id="user_co" class="easyui-combobox" name="status"
 						style="width: 200px;">
-						<option value="1">有效</option>
-						<option value="0">无效</option>
-						<option value="2">删除</option>
+							<option value="1">有效</option>
+							<option value="0">无效</option>
+							<option value="2">删除</option>
 					</select></td>
-					
+
 				</tr>
 				<tr>
 					<td><label for="userRemark">备注：</label></td>
-					<td><textarea name="remark" id="userRemark"
-							 rows="3" cols="25"></textarea></td>
+					<td><textarea name="remark" id="userRemark" rows="3" cols="25"></textarea></td>
 				</tr>
 			</table>
 		</form>
@@ -154,17 +152,18 @@
 			url = "${pageContext.request.contextPath}/sys/dept/update.data?id="
 					+ selectedRows.id;
 		}
-		
+
 		function openUserUpdateDialog() {
-			var selectedRows=$("#dept_dg").datagrid('getSelections');
-			if(selectedRows.length!=1){
-				$.messager.alert("系统提示","请选择一条要编辑的数据！");
+			var selectedRows = $("#dept_dg").datagrid('getSelections');
+			if (selectedRows.length != 1) {
+				$.messager.alert("系统提示", "请选择一条要编辑的数据！");
 				return;
 			}
-			var row=selectedRows[0];
-			$("#sysUser_dlg").dialog("open").dialog("setTitle","编辑用户信息");
-			$('#user_fm').form('load',row);
-			url="${pageContext.request.contextPath}/sys/user/update.data?id="+row.id;
+			var row = selectedRows[0];
+			$("#sysUser_dlg").dialog("open").dialog("setTitle", "编辑用户信息");
+			$('#user_fm').form('load', row);
+			url = "${pageContext.request.contextPath}/sys/user/update.data?id="
+					+ row.id;
 		}
 
 		function resetValue() {
@@ -202,7 +201,7 @@
 				}
 			});
 		}
-		
+
 		function saveUser() {
 			$("#user_fm").form("submit", {
 				url : url,
@@ -216,6 +215,8 @@
 						resetValue();
 						$("#sysUser_dlg").dialog("close");
 						$("#dept_dg").datagrid("reload");
+						$('#dept_cc').combotree("reload");
+						$('#user_cc').combotree("reload");
 					} else {
 						$.messager.alert("系统提示", "保存失败:" + result.msg);
 						return;
@@ -236,9 +237,9 @@
 		function searchUser() {
 			$('#dept_dg').datagrid('reload', {
 				username : $("#dept_username").val(),
-				deptLevel:$("#dept_level").val(),
-				deptId:$("#dept_deptId").val()
-				
+				deptLevel : $("#dept_level").val(),
+				deptId : $("#dept_deptId").val()
+
 			});
 		}
 		$('#dept_cc').combotree({
@@ -267,10 +268,10 @@
 					return data.data;
 				}
 			},
-			onClick: function(node){
+			onClick : function(node) {
 				$("#dept_level").val(node.level);
 				$("#dept_deptId").val(node.id);
-				searchUser(); 
+				searchUser();
 			}
 		});
 

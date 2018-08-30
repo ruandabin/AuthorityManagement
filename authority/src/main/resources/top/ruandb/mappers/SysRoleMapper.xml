@@ -125,4 +125,13 @@
       operate_ip = #{operateIp,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="countByName" resultType="int" parameterType="top.ruandb.entity.SysRole">
+		select
+		count(1)
+		from sys_role
+		where name = #{name}
+		<if test="id != null">
+			AND id != #{id}
+		</if>
+	</select>
 </mapper>
