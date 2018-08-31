@@ -33,7 +33,7 @@
 	<div class="easyui-accordion" data-options="fit:true,border:false">
 		<div title="权限管理" data-options="iconCls:'icon-yxgl',selected:'false'" style="padding: 10px">
 			<a href="javascript:openTab('用户管理','dept/dept.page','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px;">用户管理</a>
-			<a href="javascript:openTab('角色管理','role.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">角色管理</a>
+			<a href="javascript:openTab('角色管理','role/role.page','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">角色管理</a>
 			<a href="javascript:openTab('权限管理','aclModule/acl.page','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限管理</a>
 			<a href="javascript:openTab('权限更新记录','log.jsp','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px;">权限更新记录</a>
 		</div>

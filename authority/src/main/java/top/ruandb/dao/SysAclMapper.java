@@ -19,9 +19,15 @@ public interface SysAclMapper {
 
 	int updateByPrimaryKey(SysAcl record);
 
+	// 带条件分页查询所有
 	List<SysAclDto> selectAll(Map<String, Object> map);
 
+	// 分页带条件分页count
 	int countAll(Map<String, Object> map);
-	
+
 	int countByNameAndModuleId(SysAcl record);
+
+	List<SysAcl> getByIdList(List<Integer> idList);
+	
+	List<SysAcl> getAll();
 }

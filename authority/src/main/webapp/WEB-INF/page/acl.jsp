@@ -242,8 +242,8 @@
 			});
 		}
 
-		function closeDeptDialog() {
-			$("#acl_dlg").dialog('close');
+		function closeAclModuleDialog() {
+			$("#aclModule_dlg").dialog('close');
 			resetValue();
 		}
 		function closeAclDialog() {

@@ -1,5 +1,7 @@
 package top.ruandb.dao;
 
+import java.util.List;
+
 import top.ruandb.entity.SysRole;
 
 public interface SysRoleMapper {
@@ -16,4 +18,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKey(SysRole record);
     
     int countByName(SysRole record);
+    
+    List<SysRole> listRole();
 }

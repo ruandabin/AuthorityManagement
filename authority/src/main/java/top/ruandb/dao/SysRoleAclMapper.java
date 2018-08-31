@@ -1,5 +1,7 @@
 package top.ruandb.dao;
 
+import java.util.List;
+
 import top.ruandb.entity.SysRoleAcl;
 
 public interface SysRoleAclMapper {
@@ -14,4 +16,6 @@ public interface SysRoleAclMapper {
     int updateByPrimaryKeySelective(SysRoleAcl record);
 
     int updateByPrimaryKey(SysRoleAcl record);
+    
+    List<Integer> getAclIdListByRoleIdList(List<Integer> roleIdList);
 }

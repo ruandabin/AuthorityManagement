@@ -1,19 +1,24 @@
 package top.ruandb.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 import top.ruandb.common.RequestHolder;
 import top.ruandb.dao.SysRoleMapper;
+import top.ruandb.dto.SysRoleDto;
 import top.ruandb.entity.SysRole;
 import top.ruandb.exception.AuthorityException;
 import top.ruandb.service.SysRoleServiceI;
 import top.ruandb.utils.BeanValidator;
 import top.ruandb.utils.IpUtil;
 
+@Service("sysRoleService")
 public class SysRoleServiceImpl implements SysRoleServiceI {
 
 	@Autowired
@@ -51,4 +56,24 @@ public class SysRoleServiceImpl implements SysRoleServiceI {
 		return sysRoleMapper.countByName(sysRole) > 0;
 	}
 
+	@Override
+	public List<SysRoleDto> listRole() {
+		List<SysRole> roleList = sysRoleMapper.listRole();
+		List<SysRoleDto> roleDtoList = Lists.newArrayList();
+		for(SysRole role :  roleList){
+			roleDtoList.add(SysRoleDto.adapt(role));
+		}
+		return roleDtoList;
+	}
+
+	//根据角色获取对应的权限树
+	@Override
+	public List<SysRoleDto> roleAclTree(int roleId) {
+		// 1、当前登录用户已分配的权限点
+		// 2、当前角色分配的权限点
+		// 3、当前系统所有权限点
+		return null;
+	}
+
+	
 }

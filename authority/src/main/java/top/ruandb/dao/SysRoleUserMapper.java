@@ -1,5 +1,7 @@
 package top.ruandb.dao;
 
+import java.util.List;
+
 import top.ruandb.entity.SysRoleUser;
 
 public interface SysRoleUserMapper {
@@ -14,4 +16,6 @@ public interface SysRoleUserMapper {
     int updateByPrimaryKeySelective(SysRoleUser record);
 
     int updateByPrimaryKey(SysRoleUser record);
+    
+    List<Integer> getRoleIdListByUserId(int userId);
 }

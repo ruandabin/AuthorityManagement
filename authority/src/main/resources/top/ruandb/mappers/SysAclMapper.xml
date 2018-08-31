@@ -5,24 +5,19 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="code" property="code" jdbcType="VARCHAR" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="acl_module_id" property="aclModuleId"
-			jdbcType="INTEGER" />
+		<result column="acl_module_id" property="aclModuleId" jdbcType="INTEGER" />
 		<result column="url" property="url" jdbcType="VARCHAR" />
 		<result column="type" property="type" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="seq" property="seq" jdbcType="INTEGER" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
-		<result column="operator" property="operator"
-			jdbcType="VARCHAR" />
-		<result column="operate_time" property="operateTime"
-			jdbcType="TIMESTAMP" />
-		<result column="operate_ip" property="operateIp"
-			jdbcType="VARCHAR" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+		<result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
 	</resultMap>
 	<resultMap id="SubResultMap" type="top.ruandb.dto.SysAclDto"
 		extends="BaseResultMap">
-		<result column="moduleName" property="moduleName"
-			jdbcType="VARCHAR" />
+		<result column="moduleName" property="moduleName" jdbcType="VARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, code, name, acl_module_id, url, type, status, seq,
@@ -37,9 +32,9 @@
 		from sys_acl
 		where id = #{id,jdbcType=INTEGER}
 	</select>
-	<delete id="deleteByPrimaryKey"
-		parameterType="java.lang.Integer">
-		delete from sys_acl
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		sys_acl
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="top.ruandb.entity.SysAcl">
@@ -62,8 +57,7 @@
 		#{operateIp,jdbcType=VARCHAR}
 		)
 	</insert>
-	<insert id="insertSelective"
-		parameterType="top.ruandb.entity.SysAcl">
+	<insert id="insertSelective" parameterType="top.ruandb.entity.SysAcl">
 		insert into sys_acl
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -142,8 +136,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective"
-		parameterType="top.ruandb.entity.SysAcl">
+	<update id="updateByPrimaryKeySelective" parameterType="top.ruandb.entity.SysAcl">
 		update sys_acl
 		<set>
 			<if test="code != null">
@@ -182,21 +175,24 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey"
-		parameterType="top.ruandb.entity.SysAcl">
+	<update id="updateByPrimaryKey" parameterType="top.ruandb.entity.SysAcl">
 		update sys_acl
-		set code = #{code,jdbcType=VARCHAR},
+		set
+		code = #{code,jdbcType=VARCHAR},
 		name =
 		#{name,jdbcType=VARCHAR},
 		acl_module_id =
 		#{aclModuleId,jdbcType=INTEGER},
-		url = #{url,jdbcType=VARCHAR},
+		url =
+		#{url,jdbcType=VARCHAR},
 		type =
 		#{type,jdbcType=INTEGER},
-		status = #{status,jdbcType=INTEGER},
+		status =
+		#{status,jdbcType=INTEGER},
 		seq =
 		#{seq,jdbcType=INTEGER},
-		remark = #{remark,jdbcType=VARCHAR},
+		remark =
+		#{remark,jdbcType=VARCHAR},
 		operator =
 		#{operator,jdbcType=VARCHAR},
 		operate_time =
@@ -205,8 +201,7 @@
 		#{operateIp,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<select id="selectAll" resultMap="SubResultMap"
-		parameterType="map">
+	<select id="selectAll" resultMap="SubResultMap" parameterType="map">
 		SELECT
 		a.id, a.code, a.name, a.acl_module_id, a.url, a.type,
 		a.status,a.seq,a.remark,
@@ -259,5 +254,19 @@
 		<if test="id != null">
 			AND id != #{id}
 		</if>
+	</select>
+	<select id="getByIdList" resultType="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from sys_acl where id in
+		<foreach collection="idList" item="id" open="(" close=")"
+			separator=","> #{id}</foreach>
+	</select>
+	<select id="getAll" resultType="BaseResultMap"
+		>
+		select
+		<include refid="Base_Column_List" />
+		from sys_acl 
 	</select>
 </mapper>
