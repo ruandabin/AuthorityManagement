@@ -6,10 +6,12 @@ import top.ruandb.dto.SysAclModuleDto;
 import top.ruandb.entity.SysAclModule;
 
 public interface SysAclModuleServiceI {
-	
+
 	public void addSysAclModule(SysAclModule sysAclModule);
 
 	public List<SysAclModuleDto> sysAclModuleTree();
 
 	public void updateSysAclModule(SysAclModule sysAclModule);
+
+	public List<SysAclModuleDto> roleAclTree(int roleId);
 }

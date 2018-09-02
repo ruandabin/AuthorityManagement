@@ -26,7 +26,7 @@ public class SysCoreServiceImpl implements SysCoreServiceI {
 	@Autowired
 	private SysRoleAclMapper sysRoleAclMapper;
 
-	// 跟用户ID查询改用户的权限
+	// 跟用户ID查询该用户的权限
 	@Override
 	public List<SysAcl> getUserAclList(int userId) {
 		if (isSuperAdmin()) {

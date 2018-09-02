@@ -103,7 +103,7 @@
       operate_ip = #{operateIp,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getAclIdListByRoleIdList" resultMap="map" parameterType="int" >
+  <select id="getAclIdListByRoleIdList" resultType="int" parameterType="map" >
     select 
     acl_id
     from sys_role_acl

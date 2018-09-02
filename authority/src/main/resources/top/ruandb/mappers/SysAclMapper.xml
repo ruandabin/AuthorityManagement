@@ -254,8 +254,8 @@
 		<if test="id != null">
 			AND id != #{id}
 		</if>
-	</select>
-	<select id="getByIdList" resultType="BaseResultMap"
+	</select> 
+	<select id="getByIdList" resultMap="BaseResultMap"
 		parameterType="map">
 		select
 		<include refid="Base_Column_List" />
@@ -263,7 +263,7 @@
 		<foreach collection="idList" item="id" open="(" close=")"
 			separator=","> #{id}</foreach>
 	</select>
-	<select id="getAll" resultType="BaseResultMap"
+	<select id="getAll" resultMap="BaseResultMap"
 		>
 		select
 		<include refid="Base_Column_List" />
